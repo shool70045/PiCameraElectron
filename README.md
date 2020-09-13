@@ -1,4 +1,4 @@
-<img src="internals/img/erb-banner.png" width="100%" />
+<img src="https://www.arducam.com/wp-content/uploads/2019/09/arducam-board-camera-lens-banner-slider-home-1-1903x794.jpg" width="100%" />
 
 <br>
 
