@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect , useState} from 'react';
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
@@ -71,29 +71,35 @@ function Home(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+  const [st,setSt]= useState(null);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
+  const loadCamera = async () => {
+    const stream= await navigator.mediaDevices.getUserMedia({video: true});
+    setSt(stream);
+    document.getElementById('camera').srcObject = stream;
+  };
   const captureImage = () => {
-    spawn('python', ['from picamera import PiCamera']);
-    spawn('python', ['from random import randint']);
-    spawn('python', ["picamera.PiCamera().capture('/home/pi/Desktop/image'+randint(10000, 99999)+'.jpg')"]);
-    // const capture = spawn('python', ['py_capture.py']);
-    //  =spawn('ls');
+    // First we stop the media stream
+    st.getTracks().forEach(t => t.stop());
+    const capture = spawn('python', ['py_capture.py']);
+    
     capture.stdout.on('data', (data) => {
       // eslint-disable-next-line no-console
       console.log(`stdout: ${data}`);
+      loadCamera();
     });
     capture.stderr.on('data', (data) => {
       // eslint-disable-next-line no-console
       console.error(`stderr: ${data}`);
+      loadCamera();
     });
 
     capture.on('close', (code) => {
       // eslint-disable-next-line no-console
       console.log(`child process exited with code ${code}`);
+      loadCamera();
     });
   };
 
@@ -108,10 +114,7 @@ function Home(props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-  const loadCamera = async () => {
-    const stream= await navigator.mediaDevices.getUserMedia({video: true});
-    document.getElementById('camera').srcObject = stream;
-  };
+  
   useEffect(() => {
     loadCamera();
   },[]);
