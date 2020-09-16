@@ -53,9 +53,8 @@ yarn package
 - Check React Boilerplate : [docs and guides here](https://electron-react-boilerplate.js.org/docs/installation)
 
 ## Donations
-
+**Please donate on my paypal  "shool.pani.dubey@gmail.com"**
 **Donations will ensure the following:**
-
 - 🔨 Long term maintenance of the project
 - Frequent addition of new features to this project to make it as usable as professional DSLR'S
 - 🐛 Quick responses to bug reports and help requests
