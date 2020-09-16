@@ -1,4 +1,4 @@
-<img src="Product_ScreenShot.png" width="100%" />
+<img src="Product_ScreenShot.jpg" width="100%" />
 
 <br>
 
