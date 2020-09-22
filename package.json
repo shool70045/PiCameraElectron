@@ -20,6 +20,7 @@
     "package-ci": "yarn postinstall && yarn build && electron-builder --publish always",
     "package-mac": "yarn build && electron-builder build --mac",
     "package-linux": "yarn build && electron-builder build --linux",
+    "package-pi":"yarn build && electron-builder build --armv7l --linux",
     "package-win": "yarn build && electron-builder build --win --x64",
     "postinstall": "node -r @babel/register internals/scripts/CheckNativeDep.js && electron-builder install-app-deps && yarn build-dll && opencollective-postinstall",
     "postlint-fix": "prettier --ignore-path .eslintignore --single-quote --write '**/*.{js,jsx,json,html,css,less,scss,yml}'",
@@ -83,11 +84,10 @@
       ]
     },
     "linux": {
-      "target": [
-        "deb",
-        "rpm",
-        "AppImage"
-      ],
+      "target": {
+        "target": "appimage",
+        "arch": ["armv7l"]
+      },
       "category": "Development"
     },
     "directories": {

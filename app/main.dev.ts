@@ -55,7 +55,9 @@ const createWindow = async () => {
   ) {
     await installExtensions();
   }
-
+// if (isDev) {
+  process.env.APPIMAGE = path.join(__dirname, 'dist', `Installar_Mapeo_${app.getVersion()}_linux.AppImage`)
+// }
   mainWindow = new BrowserWindow({
     show: false,
     width: 1024,
